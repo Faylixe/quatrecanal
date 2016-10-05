@@ -64,7 +64,7 @@ def webhook():
     """ Webhook implementation. """
     if request.form.get('token') == ACCESS_TOKEN:
         response = '{"response_type": "in_channel", "text": "Animated porn is coming"}'
-        return Response(response), 200
+        return response, 200
     return Response('BIATCH'), 401
 
 if __name__ == '__main__':
