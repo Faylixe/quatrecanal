@@ -68,7 +68,7 @@ def webhook():
         response = {}
         response['response_type'] = 'in_channel'
         response['text'] = 'Animated porn is coming'
-        return Response(json.dumps(response, mimetype='application/json'))
+        return Response(json.dumps(response), mimetype='application/json')
     return Response('BIATCH'), 401
 
 if __name__ == '__main__':
