@@ -1,7 +1,5 @@
 #!/usr/bin/python
 
-from functools import lru_cache
-
 import random
 import requests
 
@@ -69,8 +67,4 @@ def webhook():
     return 401
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-d', '--debug', help='Enable debug mode')
-    parser.add_argument('-p', '--port', type=int, default=8080, help='Application port')
-    args = parser.parse_args()
-    service.run(debug=args.debug, port=args.port)
+    service.run()
