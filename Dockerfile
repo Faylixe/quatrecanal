@@ -6,7 +6,7 @@ RUN apt-get install -y python-pip python-dev build-essential
 
 RUN pip install requests flask
 COPY . quatrecanal.py
-RUN pip install -r requirements.txt
+RUN pip install requests flask
 
 ENTRYPOINT ["python"]
 CMD ["quatrecanal.py"]
