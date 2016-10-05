@@ -29,10 +29,6 @@ class Crawler:
         response = requests.get(endpoint)
         return response.json()
 
-    def getURL(name, extension):
-        """ Retrieves the image denoted by the given filename. """
-        return 'http://i.4cdn.org/%s/%s%s' % (self.board, name, extension)
-
     def parseImages(self, threads):
         """ Parses given threads list to index available images. """
         for thread in threads:
@@ -56,7 +52,7 @@ class Crawler:
             if extension in self.images:
                 selected = randint(0, len(self.images[extension]))
                 name = self.images[extension][selected]
-                return 0, 'http://i.4cdn.org/%s/%ss%s' % (self.board, name, extension)
+                return 0, 'http://i.4cdn.org/%s/%s%s' % (self.board, name, extension)
         return -1, 'No valid resource found'
 
 # Web service instance.
