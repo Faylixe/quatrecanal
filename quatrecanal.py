@@ -52,6 +52,7 @@ class Crawler:
         if not 'threads' in firstpage:
             return -1, 'No thread provided'
         self.parseImages(firstpage['threads'])
+        print(self.images)
         for extension in PRIORITY:
             if extension in self.images:
                 selected = randint(0, len(self.images[extension]))
@@ -68,7 +69,9 @@ def webhook():
         response = {}
         response['response_type'] = 'in_channel'
         crawler = Crawler('gif')
-        response['text'] = crawler.getRandomImage()
+        result, url = crawler.getRandomImage()
+        # TODO : Handle error code.
+        response['text'] = url
         return Response(json.dumps(response), mimetype='application/json')
     return Response('BIATCH'), 401
 
