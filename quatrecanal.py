@@ -65,10 +65,10 @@ service = Flask(__name__)
 def webhook():
     """ Webhook implementation. """
     if request.form.get('token') == ACCESS_TOKEN:
-        return Response(json.dumps({
-            'response_type': 'in_channel',
-            'text': 'Animated porn is coming'
-        }, mimetype='application/json')
+        response = {}
+        response['response_type'] = 'in_channel'
+        response['text'] = 'Animated porn is coming'
+        return Response(json.dumps(response, mimetype='application/json'))
     return Response('BIATCH'), 401
 
 if __name__ == '__main__':
