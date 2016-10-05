@@ -1,5 +1,4 @@
 #!/usr/bin/python
-
 import os
 import random
 import requests
@@ -65,7 +64,7 @@ def webhook():
     """ Webhook implementation. """
     if request.form.get('token') == ACCESS_TOKEN:
         return Response('Animated porn is coming'), 200
-    return 401
+    return Response('BIATCH'), 401
 
 if __name__ == '__main__':
-    service.run()
+    service.run(host='0.0.0.0')
