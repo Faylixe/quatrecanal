@@ -31,7 +31,7 @@ class Crawler:
 
     def getURL(name, extension):
         """ Retrieves the image denoted by the given filename. """
-        return 'http://i.4cdn.org/%s/%ss%s' % (self.board, name, extension)
+        return 'http://i.4cdn.org/%s/%s%s' % (self.board, name, extension)
 
     def parseImages(self, threads):
         """ Parses given threads list to index available images. """
