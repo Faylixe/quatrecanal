@@ -52,7 +52,6 @@ class Crawler:
         if not 'threads' in firstpage:
             return -1, 'No thread provided'
         self.parseImages(firstpage['threads'])
-        print(self.images)
         for extension in PRIORITY:
             if extension in self.images:
                 selected = randint(0, len(self.images[extension]))
