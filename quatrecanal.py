@@ -40,7 +40,7 @@ class Crawler:
                 if 'tim' in post:
                     name, extension = post['tim'], post['ext']
                     # TODO : Filter tim.
-                    if not extension in images:
+                    if not extension in self.images:
                         self.images[extension] = []
                     self.images[extension].append(name)
 
