@@ -48,10 +48,10 @@ class Crawler:
         """ Main access point : parse image from first board page
         and return random image based on image extension priority.
         """
-        firstpage = getResource(1)
+        firstpage = self.getResource(1)
         if not 'threads' in firstpage:
             return -1, 'No thread provided'
-        parseImages(firstpage['threads'])
+        self.parseImages(firstpage['threads'])
         for extension in PRIORITY:
             if extension in self.images:
                 selected = randint(0, len(self.images[extension]))
