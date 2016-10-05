@@ -67,7 +67,8 @@ def webhook():
     if request.form.get('token') == ACCESS_TOKEN:
         response = {}
         response['response_type'] = 'in_channel'
-        response['text'] = 'Animated porn is coming'
+        crawler = Crawler('gif')
+        response['text'] = crawler.getRandomImage()
         return Response(json.dumps(response), mimetype='application/json')
     return Response('BIATCH'), 401
 
