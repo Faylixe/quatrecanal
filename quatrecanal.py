@@ -56,7 +56,8 @@ class Crawler:
         for extension in PRIORITY:
             if extension in self.images:
                 selected = randint(0, len(self.images[extension]))
-                return 0, self.images[extension][selected]
+                name = self.images[extension][selected]
+                return 0, 'http://i.4cdn.org/%s/%ss%s' % (self.board, name, extension)
         return -1, 'No valid resource found'
 
 # Web service instance.
