@@ -15,9 +15,11 @@ PRIORITY = ['.gif', '.webm', '.png', '.jpg']
 # Access token for slack integration.
 ACCESS_TOKEN = os.environ.get('SLACK_WEBHOOK_TOKEN')
 
+# List of channel
+CHANNEL_BLACKLIST = os.environ.get('CHANNEL_BLACKLIST').split(',')
+
 # Default board to use.
 DEFAULT_BOARD = 'gif'
-
 def getBoards():
     """ Retrieves list of available boards. """
     response = requests.get('http://a.4cdn.org/boards.json')
@@ -77,20 +79,27 @@ boards = getBoards()
 def webhook():
     """ Webhook implementation. """
     if request.form.get('token') == ACCESS_TOKEN:
-        board = request.form.get('text').replace(' ', '')
-        if len(board) == 0 or not board in boards:
-            board = DEFAULT_BOARD
         response = {}
         response['response_type'] = 'in_channel'
-        crawler = Crawler(board)
-        result, data = crawler.getRandomImage()
-        if result == -1:
+        channel = request.form.get('channel_name')
+        if channel in CHANNEL_BLACKLIST:
             message = {}
             message['color'] = '#DD2222'
-            message['text'] = 'Sorry an error occurs while retriving image : %s' % data
+            message['text'] = 'Cannot post in %s (blacklisted)' % channel
             response['attachements'] = [message]
         else:
-            response['text'] = data
+            board = request.form.get('text').replace(' ', '')
+            if len(board) == 0 or not board in boards:
+                board = DEFAULT_BOARD
+            crawler = Crawler(board)
+            result, data = crawler.getRandomImage()
+            if result == -1:
+                message = {}
+                message['color'] = '#DD2222'
+                message['text'] = 'Sorry an error occurs while retriving image : %s' % data
+                response['attachements'] = [message]
+            else:
+                response['text'] = data
         return Response(json.dumps(response), mimetype='application/json')
     return Response(), 401
 
