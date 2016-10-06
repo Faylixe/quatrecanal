@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import json
+import logging
 import os
 import random
 import requests
@@ -8,6 +9,8 @@ import requests
 from random import randint
 
 from flask import Flask, request, Response
+
+logging.basicConfig(level=logging.INFO, format='[%(asctime)s][%(levelname)s] %(message)s', datefmt='%Y-%m-%d %I:%M:%S')
 
 # Extension supported sorted by priority.
 PRIORITY = ['.gif', '.webm', '.png', '.jpg']
@@ -104,4 +107,6 @@ def webhook():
     return Response(), 401
 
 if __name__ == '__main__':
+    logging.info('Slack access token : %s' % ACCESS_TOKEN)
+    logging.info('Blacklisted channel : %s' % CHANNEL_BLACKLIST)
     service.run(host='0.0.0.0')
