@@ -89,7 +89,7 @@ def webhook():
             message = {}
             message['color'] = '#DD2222'
             message['text'] = 'Cannot post in %s (blacklisted)' % channel
-            response['attachements'] = [message]
+            response['attachments'] = [message]
         else:
             board = request.form.get('text').replace(' ', '')
             if len(board) == 0 or not board in boards:
@@ -100,7 +100,7 @@ def webhook():
                 message = {}
                 message['color'] = '#DD2222'
                 message['text'] = 'Sorry an error occurs while retriving image : %s' % data
-                response['attachements'] = [message]
+                response['attachments'] = [message]
             else:
                 response['text'] = data
         return Response(json.dumps(response), mimetype='application/json')
